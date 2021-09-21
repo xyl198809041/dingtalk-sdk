@@ -19,18 +19,18 @@ class Department(DingTalkBaseAPI):
             result_processor=lambda x: x['sub_dept_id_list']
         )
 
-    def list(self, _id=1, lang='zh_CN', fetch_child=False):
+    def list(self, dept_id=1, lang='zh_CN', fetch_child=False):
         """
         获取部门列表
 
-        :param _id: 父部门id(如果不传，默认部门为根部门，根部门ID为1)
+        :param dept_id: 父部门id(如果不传，默认部门为根部门，根部门ID为1)
         :param lang: 通讯录语言(默认zh_CN，未来会支持en_US)
         :param fetch_child: 是否递归部门的全部子部门，ISV微应用固定传递false。
         :return: 部门列表数据。以部门的order字段从小到大排列
         """
         return self._get(
-            '/department/list',
-            {'id': _id, 'lang': lang, 'fetch_child': fetch_child},
+            '/topapi/v2/department/listsub',
+            {'dept_id': dept_id, 'lang': lang, 'fetch_child': fetch_child},
             result_processor=lambda x: x['department']
         )
 
