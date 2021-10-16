@@ -27,6 +27,19 @@ def get_classRole_by_userid(userid: int):
     return roles
 
 
-data = get_classRole_by_userid(194338376035126967)
-data = json.loads(client.edu.get_dept(431758564)['feature'])
+# data = get_classRole_by_userid(194338376035126967)
+# data = json.loads(client.edu.get_dept(431758564)['feature'])
+data = client.edu.get_dept(431716679)
+
+student_data = {'431723697': {}}
+for school in student_data:
+    school_data = student_data[school]['grades']
+    grade_list = client.department.list_ids(school)
+    for grade in grade_list:
+        school_data[grade] = {}
+        grade_data = school_data[grade]['classes']
+        class_list = client.department.list_ids(grade)
+        for c in class_list:
+            grade_data[c] = {}
+
 print(data)

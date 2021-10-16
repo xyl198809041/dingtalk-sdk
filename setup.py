@@ -56,13 +56,13 @@ with open('requirements.txt') as f:
 
 setup(
     name='dingtalk-sdk',
-    version='xyl-1.4.0',
+    version='xyl-1.4.1',
     keywords='dingding, ding, dtalk, dingtalk, SDK',
     description='DingTalk SDK for Python',
     long_description=long_description,
     url='https://github.com/007gzs/dingtalk-sdk',
-    author='007gzs',
-    author_email='007gzs@sina.com',
+    author='xyl',
+    author_email='',
     license='LGPL v3',
     classifiers=[
         'Development Status :: 3 - Alpha',
