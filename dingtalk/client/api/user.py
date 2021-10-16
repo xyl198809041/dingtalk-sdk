@@ -48,8 +48,9 @@ class User(DingTalkBaseAPI):
         :return:
         """
         return self._get(
-            '/user/get',
-            {'userid': userid, 'lang': lang}
+            '/topapi/v2/user/get',
+            {'userid': userid, 'lang': lang
+             }, result_processor=lambda x: x['result']
         )
 
     def create(self, user_data):

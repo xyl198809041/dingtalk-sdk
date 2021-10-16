@@ -102,7 +102,7 @@ class Department(DingTalkBaseAPI):
             result_processor=lambda x: x['parentIds']
         )
 
-    def list_parent_depts(self, user_id):
+    def list_parent_depts(self, userid):
         """
         查询指定用户的所有上级父部门路径
 
@@ -110,7 +110,7 @@ class Department(DingTalkBaseAPI):
         :return: 按顺序依次为其所有父部门的ID，直到根部门
         """
         return self._get(
-            '/department/list_parent_depts',
-            {'userId': user_id},
-            result_processor=lambda x: x['department']
+            '/topapi/v2/department/listparentbyuser',
+            {'userid': userid},
+            result_processor=lambda x: x['result']['parent_list']
         )

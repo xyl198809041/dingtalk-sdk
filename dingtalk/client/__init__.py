@@ -16,7 +16,6 @@ logger = logging.getLogger(__name__)
 
 
 class DingTalkClient(BaseClient, TaobaoMixin):
-
     attendance = api.Attendance()
     blackboard = api.BlackBoard()
     bpms = api.Bpms()
@@ -36,6 +35,7 @@ class DingTalkClient(BaseClient, TaobaoMixin):
     role = api.Role()
     user = api.User()
     workrecord = api.WorkRecord()
+    edu = api.Edu()
 
     def __init__(self, corp_id, prefix='client', storage=None, timeout=None, auto_retry=True):
         super(DingTalkClient, self).__init__(storage, timeout, auto_retry)
@@ -117,7 +117,7 @@ class DingTalkClient(BaseClient, TaobaoMixin):
 class SecretClient(DingTalkClient):
 
     def __init__(self, corp_id, corp_secret, token=None, aes_key=None, storage=None, timeout=None, auto_retry=True):
-        super(SecretClient, self).__init__(corp_id, 'secret:'+corp_id, storage, timeout, auto_retry)
+        super(SecretClient, self).__init__(corp_id, 'secret:' + corp_id, storage, timeout, auto_retry)
         self.corp_secret = corp_secret
         self.crypto = DingTalkCrypto(token, aes_key, corp_id)
 
