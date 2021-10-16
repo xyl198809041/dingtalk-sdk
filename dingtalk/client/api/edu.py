@@ -43,7 +43,7 @@ class Edu(DingTalkBaseAPI):
         return self._get(
             '/topapi/edu/dept/get',
             {'dept_id': dept_id},
-            result_processor=lambda x: x['result']
+            result_processor=lambda x: x['result']['detail']
         )
 
     def get_user(self, class_id, role, userid):

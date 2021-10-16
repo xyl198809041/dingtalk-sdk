@@ -19,11 +19,14 @@ def get_classRole_by_userid(userid: int):
         elif client.department.get(d[0])['name'] == '家长':
             r_data_list = client.edu.get_relation(d[1], userid)
             for r_data in r_data_list:
-                roles.append({'name': client.user.get(r_data['to_userid'])['name']+r_data['relation_name'],
+                roles.append({'name': client.user.get(r_data['to_userid'])['name'] + r_data['relation_name'],
                               'role': 'guardian',
-                              'class_id': r_data['class_id']})
+                              'class_id': r_data['class_id'],
+                              'level': json.loads(client.edu.get_dept(r_data['class_id'])['feature'])}
+                             )
     return roles
 
 
 data = get_classRole_by_userid(194338376035126967)
+data = json.loads(client.edu.get_dept(431758564)['feature'])
 print(data)
