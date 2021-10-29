@@ -1,45 +1,52 @@
 import json
+import time
 
 from dingtalk import AppKeyClient
 
 client = AppKeyClient('ding8ebd56e729af6c4324f2f5cc6abecb85', 'dingtiqtbir6iyph6guc',
                       'OeBB6VCC_tL77vkhTma71mvBKYq4YjyPFbV3XwWoc3Uvq6PNzVI9flVDXL24SmPY')
 
-
-def get_classRole_by_userid(userid: int):
-    roles = []
-    list_parent_depts = client.department.list_parent_depts(userid)
-    d_list = [d['parent_dept_id_list'] for d in list_parent_depts if len(d['parent_dept_id_list']) == 7]
-    for d in d_list:
-        if client.department.get(d[0])['name'] == '老师':
-            r_data_list = client.edu.get_user(d[1], 'teacher', userid)
-            for r_data in r_data_list:
-                roles.append({'name': r_data['name'], 'role': r_data['role'], 'class_id': r_data['class_id'],
-                              'admin': json.loads(r_data['feature'])['is_adviser'] == 1})
-        elif client.department.get(d[0])['name'] == '家长':
-            r_data_list = client.edu.get_relation(d[1], userid)
-            for r_data in r_data_list:
-                roles.append({'name': client.user.get(r_data['to_userid'])['name'] + r_data['relation_name'],
-                              'role': 'guardian',
-                              'class_id': r_data['class_id'],
-                              'level': json.loads(client.edu.get_dept(r_data['class_id'])['feature'])}
-                             )
-    return roles
-
-
-# data = get_classRole_by_userid(194338376035126967)
-# data = json.loads(client.edu.get_dept(431758564)['feature'])
-data = client.edu.get_dept(431716679)
-
-student_data = {'431723697': {}}
-for school in student_data:
-    school_data = student_data[school]['grades']
-    grade_list = client.department.list_ids(school)
-    for grade in grade_list:
-        school_data[grade] = {}
-        grade_data = school_data[grade]['classes']
-        class_list = client.department.list_ids(grade)
-        for c in class_list:
-            grade_data[c] = {}
-
+# 9班 id=431758564  群id=chat70ea37feee48779aeaaf3bb2e5ccb707
+data = client.department.get(431758564)
+# aaa = client.chat.send('chat70ea37feee48779aeaaf3bb2e5ccb707',
+#                        {"msgtype": "text", "text": {"content": "试一下。"},
+#                         "at": {
+#                             "atMobiles": [
+#                                 "15858291872"
+#                             ],
+#                             "atUserIds": [
+#                                 "194338376035126967"
+#                             ],
+#                             "isAtAll": False
+#                         },
+#                         })
+# aaa=client.workrecord.add(194338376035126967, int(time.time()), '标题', 'https://class.hzsgz.com/wzx/#/index', {
+#     "title": "新人学习2",
+#     "content": "产品学习"
+# })
+# aaa = client.message.asyncsend_v2({
+#     "msgtype": "action_card",
+#     "action_card": {
+#         "title": "晚自习签退",
+#         "markdown":
+# '''# 晚自修签退
+# 是否已接到孩子''',
+#         "btn_orientation": "1",
+#         "btn_json_list": [
+#             {
+#                 "title": "已接到",
+#                 "action_url": "https://www.taobao.com"
+#             },
+#             {
+#                 "title": "未接到",
+#                 "action_url": "https://www.tmall.com"
+#             }
+#         ]
+#     }
+# },
+#                                   '1307827078',
+#                                   ['194338376035126967'])
+# aaa = client.edu.get_studentinfo(431758564, 1307827078, 1610704200083)
+aaa=client.edu.get_relation_list(431758564)
+print(aaa)
 print(data)

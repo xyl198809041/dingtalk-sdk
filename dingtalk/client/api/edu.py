@@ -80,6 +80,34 @@ class Edu(DingTalkBaseAPI):
             else:
                 page_no = page_no + 1
         return rt_list
+
+    def get_relation_list(self, class_id):
+        """
+获取关系列表
+        @param class_id:
+        @return:
+        """
+        page_no = 1
+        rt_list = []
+        while True:
+            rt = self._get(
+                '/topapi/edu/user/relation/list',
+                {'page_size': 30, 'page_no': page_no, 'class_id': class_id},
+                result_processor=lambda x: x['result']
+            )
+            rt_list.extend(rt['relations'])
+            if not rt['has_more']:
+                break
+            else:
+                page_no = page_no + 1
+        return rt_list
+
+    def get_studentinfo(self, class_id, app_id, userid):
+        return self._get(
+            '/topapi/edu/class/studentinfo/get',
+            {'class_id': class_id, 'userid': userid},
+            result_processor=lambda x: x['result']
+        )
     #
     # def create(self, department_data):
     #     """
