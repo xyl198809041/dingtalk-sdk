@@ -46,7 +46,13 @@ data = client.department.get(431758564)
 # },
 #                                   '1307827078',
 #                                   ['194338376035126967'])
-# aaa = client.edu.get_studentinfo(431758564, 1307827078, 1610704200083)
-aaa=client.edu.get_relation_list(431758564)
-print(aaa)
-print(data)
+# aaa = client.edu.get_studentinfo(431758564, 1307827078, )
+# aaa = client.message.asyncsend_v2({
+#     "msgtype": "text",
+#     "text": {
+#         "content": '2212'
+#     }
+# }, 1307827078, [194338376035126967])
+#
+# print(aaa)
+# print(data)

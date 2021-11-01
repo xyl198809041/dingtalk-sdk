@@ -4,7 +4,7 @@ from __future__ import absolute_import, unicode_literals
 
 class DingTalkBaseAPI(object):
 
-    API_BASE_URL = None
+    API_BASE_URL = 'https://oapi.dingtalk.com'
 
     def __init__(self, client=None):
         self._client = client

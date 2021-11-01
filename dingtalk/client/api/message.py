@@ -142,7 +142,7 @@ class Message(DingTalkBaseAPI):
             result_processor=lambda x: x['task_id']
         )
 
-    def asyncsend_v2(self, msg_body, agent_id, userid_list=(), dept_id_list=(), to_all_user=False):
+    def asyncsend_v2(self, msg_body, agent_id, userid_list=[], dept_id_list=[], to_all_user=False):
         """
         企业会话消息异步发送
 
@@ -161,19 +161,28 @@ class Message(DingTalkBaseAPI):
             userid_list = None
         if not dept_id_list:
             dept_id_list = None
-        if isinstance(msg_body, BodyBase):
-            msg_body = msg_body.get_dict()
-        return self._top_request(
-            'dingtalk.oapi.message.corpconversation.asyncsend_v2',
-            optionaldict({
-                "msg": msg_body,
-                'agent_id': agent_id,
-                'userid_list': userid_list,
-                'dept_id_list': dept_id_list,
-                'to_all_user': 'true' if to_all_user else 'false'
-            }),
+        # if isinstance(msg_body, BodyBase):
+        #     msg_body = msg_body.get_dict()
+        return self._post(
+            '/topapi/message/corpconversation/asyncsend_v2',
+            {'agent_id': agent_id,
+             'userid_list': userid_list,
+             'dept_id_list': dept_id_list,
+             'to_all_user': to_all_user,
+             'msg': msg_body},
             result_processor=lambda x: x['task_id']
         )
+        # return self._top_request(
+        #     'dingtalk.oapi.message.corpconversation.asyncsend_v2',
+        #     optionaldict({
+        #         "msg": msg_body,
+        #         'agent_id': agent_id,
+        #         'userid_list': userid_list,
+        #         'dept_id_list': dept_id_list,
+        #         'to_all_user': 'true' if to_all_user else 'false'
+        #     }),
+        #     result_processor=lambda x: x['task_id']
+        # )
 
     def recall(self, agent_id, msg_task_id):
         """
