@@ -34,6 +34,7 @@ class DingTalkClient(BaseClient, TaobaoMixin):
     report = api.Report()
     role = api.Role()
     user = api.User()
+    wenjuan=api.Wenjuan()
     workrecord = api.WorkRecord()
     edu = api.Edu()
 

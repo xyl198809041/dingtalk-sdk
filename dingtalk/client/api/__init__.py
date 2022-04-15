@@ -21,3 +21,4 @@ from dingtalk.client.api.role import Role  # NOQA
 from dingtalk.client.api.user import User  # NOQA
 from dingtalk.client.api.workrecord import WorkRecord  # NOQA
 from dingtalk.client.api.edu import Edu  # NOQA
+from dingtalk.client.api.wenjuan import Wenjuan

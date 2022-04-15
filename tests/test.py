@@ -7,7 +7,18 @@ client = AppKeyClient('ding8ebd56e729af6c4324f2f5cc6abecb85', 'dingtiqtbir6iyph6
                       'OeBB6VCC_tL77vkhTma71mvBKYq4YjyPFbV3XwWoc3Uvq6PNzVI9flVDXL24SmPY')
 
 # 9班 id=431758564  群id=chat70ea37feee48779aeaaf3bb2e5ccb707
-data = client.department.get(431758564)
+rt = client.wenjuan.list_ids()
+data = client.wenjuan.get_data(rt['list'][0]['form_code'])
+# data = client.user.get(10086)['mobile']
+
+
+def get_lvma(wenjuan_data):
+    for d in wenjuan_data['forms']:
+        if d['label'] == '健康码':
+            return d['value'][2:-2]
+
+url=get_lvma(data[0])
+print(data)
 # aaa = client.chat.send('chat70ea37feee48779aeaaf3bb2e5ccb707',
 #                        {"msgtype": "text", "text": {"content": "试一下。"},
 #                         "at": {
