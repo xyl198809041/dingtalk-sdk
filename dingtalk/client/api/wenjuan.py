@@ -6,7 +6,7 @@ from dingtalk.client.api.base import DingTalkBaseAPI
 
 class Wenjuan(DingTalkBaseAPI):
 
-    def list_ids(self):
+    def list_ids(self,biz_type=1):
         """
         获取子部门ID列表
 
@@ -16,18 +16,19 @@ class Wenjuan(DingTalkBaseAPI):
         return self._post(
             '/topapi/collection/form/list',
             {
+                'biz_type':biz_type,
                 'offset': 0,
                 'size': 200},
             result_processor=lambda x: x['result']
         )
 
-    def get_data(self, form_code):
+    def get_data(self, form_code,biz_type=1):
         page_no = 0
         rt_list = []
         while True:
             rt = self._post(
                 '/topapi/collection/instance/list',
-                {'form_code': form_code, 'offset': page_no, 'size': 10},
+                {'form_code': form_code, 'offset': page_no, 'size': 100,'biz_type':biz_type},
                 result_processor=lambda x: x['result']
             )
             rt_list.extend(rt['list'])
