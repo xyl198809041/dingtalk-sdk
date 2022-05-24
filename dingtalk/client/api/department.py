@@ -114,3 +114,10 @@ class Department(DingTalkBaseAPI):
             {'userid': userid},
             result_processor=lambda x: x['result']['parent_list']
         )
+
+    def listsub(self, _id):
+        return self._post(
+            '/topapi/v2/department/listsub',
+            {'dept_id': _id},
+            result_processor=lambda x: x['result']
+        )
